@@ -9,30 +9,65 @@ class Solution:
     def getHappyString(self, n: int, k: int) -> str:
         
         """
-        Solution 2 :
-            Beats 100% 0ms
-        """
+        1415. The k-th Lexicographical String of All Happy Strings of Length n
+        A happy string is a string that:
+            consists only of letters of the set ['a', 'b', 'c'].
+            s[i] != s[i + 1] for all values of i from 1 to s.length - 1 (string is 1-indexed).
 
+        For example, strings "abc", "ac", "b" and "abcbabcbcb" are all happy strings and strings "aa", "baa" and "ababbc" are not happy strings.
+        Given two integers n and k, consider a list of all happy strings of length n sorted in lexicographical order.
+        Return the kth string of this list or return an empty string if there are less than k happy strings of length n.
+        """
+                                   
+        """
+        
+        
+                                       *** THIS SOLUTION BEATS 100% ****
+        //Running time = 0 ms
+        
+        
+        The idea is to construct the k-th happy string directly by counting permutations
+        instead of generating all possible happy strings and selecting the k-th one.
+        
+        For example, if n = 3 and k = 9:
+        - A happy string of length 3 consists of 3 characters, where each character must
+          be different from the previous one.
+        - The first character determines a group of strings, where each choice of the
+          first character leads to multiple valid strings.
+        - Since we have 3 possible starting characters ('a', 'b', or 'c'), and each
+          choice leads to (2^(n-1)) valid strings, we can determine the first character
+          by dividing k by this count.
+        - By iteratively reducing k and determining subsequent characters, we efficiently
+          construct the desired string without generating all possibilities.
+        """
+        
+        #Number of valid string is less the the required kth string, return ""
         if k> 3*(2**(n-1)):
             return ""
             
         happy = "abc"
+        
+        #Special case for the "for" loop, handle here
         if n==1:
             return happy[k-1]
 
+        #Return the next smalles possible char which is different from the preious char
+        #to make sure the answer is sorted, 
         def smallest(t):
             return "a" if t!="a"  else "b"
         
-        k = k-1
-        ans = ""
+        # Because the k-th answer is 1-indexed
+        # to compensate for the offset
+        k = k-1  
         
+        ans = ""
         quotient = k
-        #remainder = k
+
         
         for i in range(1, n+1):
             d = 2**(n-i)
             remainder = quotient%d
-            quotient = quotient//d
+            quotient = quotient//d  #quotient can either be 0 or 1
             
             if i < n:
                 if ans=="":
@@ -41,11 +76,11 @@ class Solution:
                     if quotient:
                         ans += "c" if ans[-1]!="c" else "b"
                     else:
-                        #quotient = 0
+                        # i.e. quotient = 0
                         ans += smallest( ans[-1] )
                 quotient = remainder
             else:
-                #i==n, last char
+                # i==n, i.e. last char
                 if quotient:
                     ans += "c" if ans[-1]!="c" else "b"
                 else:
