@@ -60,8 +60,8 @@ class Solution:
         n = len(nums[0])
 
         ans = ""
-        i = 0
-        for x in nums:
+        
+        for i, x in enumerate(nums):
             ans += "0" if x[i]=="1" else "1"
             i += 1
         
