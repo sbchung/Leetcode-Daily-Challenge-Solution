@@ -2,7 +2,10 @@
 """
 Created on Sat Mar  1 04:31:30 2025
 
-@author: kaich
+@author: KC Cheuk
+
+1092 Shortest Common Supersequence
+https://leetcode.com/problems/shortest-common-supersequence/description/
 """
 
 class Solution:
