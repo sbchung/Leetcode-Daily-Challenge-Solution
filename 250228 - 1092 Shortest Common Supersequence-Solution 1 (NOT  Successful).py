@@ -2,7 +2,10 @@
 """
 Created on Fri Feb 28 17:41:42 2025
 
-@author: kaich
+@author: KC Cheuk
+
+    1092 Shortest Common Supersequence
+    https://leetcode.com/problems/shortest-common-supersequence/description/
 """
 
 class Solution:
@@ -113,7 +116,7 @@ str2 = "cabccc"
 
 str1 = "baabaaabb"
 str2 = "bbabbbaab"
-
+Expected = "babbbaabb"
 # str1 = "abckkk"
 # str2 = "pppabc"
 
